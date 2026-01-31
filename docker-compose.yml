@@ -1,0 +1,16 @@
+services:
+  python-tester:
+    build:
+      context: ./python-tester
+      dockerfile: Dockerfile
+    image: production-systems/python-tester:latest
+    environment:
+      SERIAL_PORT: ${SERIAL_PORT}
+      API_BASE_URL: ${API_BASE_URL:-http://localhost:8080/api}
+      DEVICE_ID: ${DEVICE_ID:-UNKNOWN_DEVICE}
+      LOG_LEVEL: ${LOG_LEVEL:-INFO}
+    devices:
+      - "${SERIAL_PORT}:${SERIAL_PORT}"
+    volumes:
+      - ./python-tester/test-results:/app/test-results
+    command: ["python", "-m", "src.cli"]
