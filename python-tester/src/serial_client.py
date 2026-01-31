@@ -16,7 +16,14 @@ class SerialClient:
     def open(self) -> None:
         if self._serial and self._serial.is_open:
             return
-        self._serial = serial.Serial(self.port, self.baudrate, timeout=self.timeout_s)
+        if self.port.startswith("socket://"):
+            self._serial = serial.serial_for_url(
+                self.port, baudrate=self.baudrate, timeout=self.timeout_s
+            )
+        else:
+            self._serial = serial.Serial(
+                self.port, self.baudrate, timeout=self.timeout_s
+            )
         time.sleep(1.0)
         self._serial.reset_input_buffer()
 

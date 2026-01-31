@@ -42,7 +42,17 @@ def main() -> int:
     logger.info("Starting test run")
 
     tests_path = Path(__file__).resolve().parents[1] / "tests"
-    pytest_args = ["-q", "--disable-warnings", f"--maxfail={args.maxfail}", str(tests_path)]
+    pytest_args = [
+        "-q",
+        "--disable-warnings",
+        f"--maxfail={args.maxfail}",
+        "-s",
+        "-o",
+        "log_cli=true",
+        "-o",
+        f"log_cli_level={os.getenv('LOG_LEVEL','INFO')}",
+        str(tests_path),
+    ]
     exit_code = pytest.main(pytest_args)
 
     if exit_code == 0:

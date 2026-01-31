@@ -1,11 +1,12 @@
-FROM python:3.11-slim
+FROM python:3.13-slim
 
 ENV PYTHONUNBUFFERED=1 \
     PIP_NO_CACHE_DIR=1
 
 WORKDIR /app
 
-RUN groupadd -r dialout && useradd -r -g dialout appuser
+RUN getent group dialout || groupadd -r dialout \
+    && id -u appuser >/dev/null 2>&1 || useradd -r -g dialout appuser
 
 COPY requirements.txt ./
 RUN pip install --upgrade pip \

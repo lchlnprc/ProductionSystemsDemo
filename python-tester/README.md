@@ -9,12 +9,13 @@ This module communicates with the Arduino over serial, runs automated pytest sui
    - `pip install -r requirements.txt`
 3. Run the test runner:
    - `python -m src.cli --port /dev/tty.usbserial-XXXX --device-id DEVICE_001`
+4. check logs docker compose logs -f python-tester
 
 ## Docker usage
 
 Ensure the Arduino is connected and export the serial device path:
 
-- SERIAL_PORT=/dev/tty.usbserial-XXXX
+- SERIAL_PORT=/dev/cu.usbserial-1230
 - DEVICE_ID=DEVICE_001
 - API_BASE_URL=http://localhost:8080/api
 
