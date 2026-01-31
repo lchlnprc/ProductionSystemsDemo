@@ -1,0 +1,18 @@
+.card {
+  background: var(--color-panel);
+  border-radius: 18px;
+  padding: 16px;
+  box-shadow: var(--shadow-card);
+  display: grid;
+  gap: 12px;
+}
+
+.header {
+  font-size: 14px;
+  color: var(--color-text);
+  font-weight: 600;
+}
+
+.content {
+  height: 240px;
+}

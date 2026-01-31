@@ -1,0 +1,33 @@
+:root {
+  font-family: "Inter", "Segoe UI", system-ui, sans-serif;
+  color: #1b1f1d;
+  background: #f6f8f5;
+  --color-surface: #f6f8f5;
+  --color-panel: #ffffff;
+  --color-text: #1b1f1d;
+  --color-text-muted: #687074;
+  --color-border: #e3e8e3;
+  --color-accent: #40916c;
+  --color-accent-dark: #2d6a4f;
+  --color-warning: #f59f3a;
+  --color-danger: #d64545;
+  --shadow-card: 0 6px 18px rgba(20, 30, 20, 0.08);
+  --shadow-card-hover: 0 10px 24px rgba(20, 30, 20, 0.12);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--color-surface);
+}
+
+button {
+  font-family: inherit;
+}
+
+a {
+  color: inherit;
+}

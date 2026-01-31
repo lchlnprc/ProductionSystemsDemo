@@ -1,0 +1,21 @@
+.card {
+  background: var(--color-panel);
+  border-radius: 18px;
+  padding: 20px;
+  box-shadow: var(--shadow-card);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-card-hover);
+}
+
+.title {
+  margin: 0;
+  font-size: 16px;
+  color: var(--color-text);
+}

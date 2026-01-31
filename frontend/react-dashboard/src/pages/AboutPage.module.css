@@ -1,0 +1,33 @@
+.page {
+  display: grid;
+  gap: 24px;
+  animation: fadeIn 0.4s ease;
+}
+
+.section {
+  background: var(--color-panel);
+  padding: 20px;
+  border-radius: 16px;
+  box-shadow: var(--shadow-card);
+}
+
+.diagram {
+  margin-top: 16px;
+  height: 220px;
+  border: 2px dashed var(--color-border);
+  border-radius: 12px;
+  display: grid;
+  place-items: center;
+  color: var(--color-text-muted);
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

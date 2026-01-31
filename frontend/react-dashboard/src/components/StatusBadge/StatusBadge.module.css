@@ -1,0 +1,26 @@
+.badge {
+  padding: 6px 10px;
+  border-radius: 999px;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-weight: 600;
+}
+
+.passed,
+.ok {
+  background: rgba(45, 106, 79, 0.15);
+  color: var(--color-accent-dark);
+}
+
+.failed,
+.critical {
+  background: rgba(217, 64, 64, 0.15);
+  color: var(--color-danger);
+}
+
+.running,
+.warning {
+  background: rgba(249, 164, 73, 0.18);
+  color: var(--color-warning);
+}

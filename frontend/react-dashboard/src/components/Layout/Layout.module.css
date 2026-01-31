@@ -1,0 +1,29 @@
+.shell {
+  display: grid;
+  grid-template-columns: 240px 1fr;
+  min-height: 100vh;
+  background: var(--color-surface);
+  color: var(--color-text);
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+}
+
+.main {
+  padding: 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+@media (max-width: 1024px) {
+  .shell {
+    grid-template-columns: 72px 1fr;
+  }
+
+  .main {
+    padding: 24px;
+  }
+}

@@ -1,0 +1,51 @@
+.page {
+  display: grid;
+  gap: 24px;
+  animation: fadeIn 0.4s ease;
+}
+
+.linkButton {
+  border: none;
+  background: none;
+  color: var(--color-accent-dark);
+  cursor: pointer;
+}
+
+.filterRow {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.filterRow button {
+  border: 1px solid var(--color-border);
+  background: var(--color-surface);
+  padding: 6px 12px;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.filterRow button:hover {
+  border-color: var(--color-accent);
+}
+
+.active {
+  background: rgba(64, 145, 108, 0.18);
+  border-color: var(--color-accent);
+}
+
+.muted {
+  color: var(--color-text-muted);
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

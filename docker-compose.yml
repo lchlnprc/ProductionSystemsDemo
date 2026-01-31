@@ -39,5 +39,17 @@ services:
     volumes:
       - postgres_data:/var/lib/postgresql/data
 
+  frontend:
+    build:
+      context: ./frontend/react-dashboard
+      dockerfile: Dockerfile
+    image: production-systems/react-dashboard:latest
+    environment:
+      VITE_API_BASE_URL: /api
+    ports:
+      - "5173:80"
+    depends_on:
+      - backend
+
 volumes:
   postgres_data:
