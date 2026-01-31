@@ -1,6 +1,8 @@
 package com.productionsystems.demo.controller;
 
+import com.productionsystems.demo.dto.LatestDashboardResponse;
 import com.productionsystems.demo.dto.MetricsResponse;
+import com.productionsystems.demo.dto.TestRunDetailResponse;
 import com.productionsystems.demo.dto.TestRunResponse;
 import com.productionsystems.demo.dto.TestRunSubmissionRequest;
 import com.productionsystems.demo.service.TestRunService;
@@ -10,6 +12,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/api")
@@ -26,6 +29,16 @@ public class TestRunController {
     @GetMapping("/test-runs")
     public List<TestRunResponse> list(@RequestParam(value = "deviceId", required = false) String deviceId) {
         return testRunService.list(deviceId);
+    }
+
+    @GetMapping("/test-runs/latest")
+    public LatestDashboardResponse latest() {
+        return testRunService.latest();
+    }
+
+    @GetMapping("/test-runs/{id}")
+    public TestRunDetailResponse get(@PathVariable("id") UUID id) {
+        return testRunService.getById(id);
     }
 
     @GetMapping("/metrics")

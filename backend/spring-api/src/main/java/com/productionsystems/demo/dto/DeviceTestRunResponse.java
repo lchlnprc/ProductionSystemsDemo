@@ -8,9 +8,9 @@ import java.util.UUID;
 
 @Value
 @Builder
-public class DeviceResponse {
+public class DeviceTestRunResponse {
     UUID id;
-    String deviceId;
-    OffsetDateTime registeredAt;
-    String health;
+    String runId;
+    String status;
+    OffsetDateTime finishedAt;
 }
