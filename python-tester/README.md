@@ -36,3 +36,5 @@ Logs are JSON-formatted and written to stdout. Set LOG_LEVEL to control verbosit
 - `DEVICE_ID` (default: `UNKNOWN_DEVICE`)
 - `API_BASE_URL` (default: `http://localhost:8080/api`)
 - `OUTPUT_DIR` (default: `./test-results`)
+- `SERIAL_TIMEOUT_S` (default: `2.5`)
+- `SKIP_API_POST` (set to `true` to skip posting results)

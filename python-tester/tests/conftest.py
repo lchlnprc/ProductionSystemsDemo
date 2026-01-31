@@ -65,6 +65,11 @@ def pytest_sessionfinish(session, exitstatus):
     console.print(f"JSON results: {output_path}", style="bold blue")
     logger.info("Wrote JSON results", extra={"path": str(output_path)})
 
+    if os.getenv("SKIP_API_POST", "").lower() in {"1", "true", "yes"}:
+        console.print("API post skipped", style="bold yellow")
+        logger.info("API post skipped")
+        return
+
     api_client = ApiClient(cfg.api_base_url, cfg.api_timeout_s)
     try:
         api_client.post_test_run(recorder.to_run_result())
