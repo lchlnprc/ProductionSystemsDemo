@@ -38,15 +38,20 @@ public class TestRunService {
                 .device(device)
                 .startedAt(request.getStartedAt())
                 .finishedAt(request.getFinishedAt())
-                .totalTests(request.getTotalTests())
-                .passed(request.getPassed())
-                .failed(request.getFailed())
                 .build();
 
         List<TestResult> results = request.getResults().stream()
                 .map(resultRequest -> mapResult(testRun, resultRequest))
                 .collect(Collectors.toList());
         testRun.setResults(results);
+
+        int totalTests = results.size();
+        int passed = (int) results.stream().filter(result -> "passed".equalsIgnoreCase(result.getStatus())).count();
+        int failed = (int) results.stream().filter(result -> "failed".equalsIgnoreCase(result.getStatus())).count();
+
+        testRun.setTotalTests(totalTests);
+        testRun.setPassed(passed);
+        testRun.setFailed(failed);
 
         TestRun saved = testRunRepository.save(testRun);
 

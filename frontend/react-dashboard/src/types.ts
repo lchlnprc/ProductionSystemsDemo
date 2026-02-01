@@ -58,3 +58,13 @@ export interface TestRunDetail {
     }>;
   }>;
 }
+
+export interface TestExecutionResponse {
+  id: string;
+  deviceId: string;
+  status: "PENDING" | "RUNNING" | "SUCCESS" | "FAILED";
+  requestedAt: string;
+  startedAt?: string | null;
+  finishedAt?: string | null;
+  message?: string | null;
+}

@@ -4,7 +4,8 @@ import type {
   DeviceTestRun,
   TestRunDetail,
   TestRunSummary,
-  TestRunLatestResponse
+  TestRunLatestResponse,
+  TestExecutionResponse
 } from "../types";
 
 const baseUrl = import.meta.env.VITE_API_BASE_URL ?? "/api";
@@ -27,6 +28,16 @@ export const api = createApi({
     }),
     getTestRuns: builder.query<TestRunSummary[], void>({
       query: () => "/test-runs"
+    }),
+    runTest: builder.mutation<TestExecutionResponse, { deviceId: string; requestedBy?: string; notes?: string }>({
+      query: ({ deviceId, ...body }) => ({
+        url: `/devices/${deviceId}/run-test`,
+        method: "POST",
+        body
+      })
+    }),
+    getTestExecution: builder.query<TestExecutionResponse, string>({
+      query: (id) => `/test-executions/${id}`
     })
   })
 });
@@ -36,5 +47,7 @@ export const {
   useGetDevicesQuery,
   useGetDeviceTestRunsQuery,
   useGetTestRunByIdQuery,
-  useGetTestRunsQuery
+  useGetTestRunsQuery,
+  useRunTestMutation,
+  useGetTestExecutionQuery
 } = api;
