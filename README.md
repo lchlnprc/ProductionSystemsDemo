@@ -11,7 +11,7 @@ https://jobs.lever.co/halter/8b8df411-3412-4a99-9b53-18914b1b7d0d
 This is a production-style hardware validation platform that:
 
 - Uses an **Arduino Nano** with a **DHT temperature sensor** connected over **USB serial**.
-- Runs a **containerized Python test runner** that reads sensor data and posts structured results.
+- Runs a **containerised Python test runner** that reads sensor data and posts structured results.
 - Exposes a **Spring Boot (Java) API** backed by **PostgreSQL** for devices, runs, and results.
 - Provides a **React + TypeScript dashboard** with REST endpoints and **live device output streaming** via a macOS **socat** serial bridge.
 
