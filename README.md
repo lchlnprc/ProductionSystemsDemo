@@ -17,6 +17,9 @@ This is a production-style hardware validation platform that:
 
 ## Architecture
 
+### System overview
+![System Overview](readme/images/SystemOverview.png)
+
 ### Hardware + Test Runner
 
 - Arduino Nano + DHT sensor sends readings over USB serial.
