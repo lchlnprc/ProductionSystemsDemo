@@ -13,12 +13,17 @@
 
 .diagram {
   margin-top: 16px;
-  height: 220px;
-  border: 2px dashed var(--color-border);
   border-radius: 12px;
-  display: grid;
-  place-items: center;
-  color: var(--color-text-muted);
+  display: flex;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.diagram img {
+  width: 100%;
+  height: auto;
+  max-width: 800px;
+  border-radius: 8px;
 }
 
 @keyframes fadeIn {

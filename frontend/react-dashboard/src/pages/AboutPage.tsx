@@ -10,7 +10,9 @@ export function AboutPage() {
           streams sensor data, validates stability and ranges, then posts structured results to a
           Spring Boot API backed by PostgreSQL.
         </p>
-        <div className={styles.diagram}>Diagram placeholder</div>
+        <div className={styles.diagram}>
+          <img src="/images/SystemOverview.png" alt="System Architecture Overview" />
+        </div>
       </section>
       <section className={styles.section}>
         <h2>Motivation</h2>
