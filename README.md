@@ -64,7 +64,7 @@ The Python test runner executes the following tests:
 
 ## Hardware setup
 
-I could not find a breadboard or a soldering iron at home, so the hardware setup is held together with bluetac.
+Please excuse the rudimentary setup, I could not find a breadboard or soldering iron at home.
 
 ### Arduino Nano wiring (pin-out)
 ![Arduino Pin-Out](readme/images/ArduinoPinOutDiagram.png)
