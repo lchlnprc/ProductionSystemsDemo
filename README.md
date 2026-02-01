@@ -1,9 +1,10 @@
 # ProductionSystemsDemo
 
+Author: **Lachlan Pearce**
+
 This project was built to support my job application for **Full Stack Software Engineer – Production Systems** at Halter:
 https://jobs.lever.co/halter/8b8df411-3412-4a99-9b53-18914b1b7d0d
 
-Author: **Lachlan Pearce**
 
 ## Overview
 
@@ -35,6 +36,12 @@ This is a production-style hardware validation platform that:
 - RTK Query for data fetching, charts via Recharts.
 - Device runs and metrics are pulled from REST endpoints.
 - Live output uses SSE from the backend, which streams data from a **socat**-bridged serial TCP socket.
+
+### Live test run trigger (UI → API → Python)
+
+- The UI posts a **run-test** request to the backend REST API for a selected device.
+- The backend records a pending test execution and exposes it to the Python test runner.
+- The Python test runner (agent) polls the API, claims the next pending execution, runs the tests automatically, and posts results back to the API.
 
 ## Tests Executed
 
