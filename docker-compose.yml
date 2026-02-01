@@ -13,6 +13,20 @@ services:
       - ./python-tester/test-results:/app/test-results
     command: ["python", "-m", "src.cli"]
 
+  python-tester-agent:
+    build:
+      context: ./python-tester
+      dockerfile: Dockerfile
+    image: production-systems/python-tester:latest
+    environment:
+      SERIAL_PORT: socket://host.docker.internal:4000
+      API_BASE_URL: http://backend:8080/api
+      DEVICE_ID: ${DEVICE_ID:-DEVICE_001}
+      LOG_LEVEL: ${LOG_LEVEL:-INFO}
+    volumes:
+      - ./python-tester/test-results:/app/test-results
+    command: ["python", "-m", "src.cli", "--poll"]
+
   backend:
     build:
       context: ./backend/spring-api

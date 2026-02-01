@@ -38,3 +38,9 @@ Logs are JSON-formatted and written to stdout. Set LOG_LEVEL to control verbosit
 - `OUTPUT_DIR` (default: `./test-results`)
 - `SERIAL_TIMEOUT_S` (default: `2.5`)
 - `SKIP_API_POST` (set to `true` to skip posting results)
+
+## Remote test polling
+
+Run the test agent to poll for execution requests:
+
+- `python -m src.cli --poll --device-id DEVICE_001 --api-url http://localhost:8080/api`
