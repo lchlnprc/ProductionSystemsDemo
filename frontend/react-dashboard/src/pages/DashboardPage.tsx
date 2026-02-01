@@ -58,8 +58,8 @@ export function DashboardPage() {
           {data ? (
             <ResponsiveContainer width="100%" height="100%">
               <LineChart data={data.temperatureTrend}>
-                <XAxis dataKey="time" hide />
-                <YAxis hide />
+                <XAxis dataKey="time" tickMargin={8} />
+                <YAxis tickMargin={8} />
                 <Tooltip />
                 <Line type="monotone" dataKey="temperature" stroke="#2d6a4f" strokeWidth={2} />
               </LineChart>
@@ -73,8 +73,8 @@ export function DashboardPage() {
           {data ? (
             <ResponsiveContainer width="100%" height="100%">
               <LineChart data={data.humidityTrend}>
-                <XAxis dataKey="time" hide />
-                <YAxis hide />
+                <XAxis dataKey="time" tickMargin={8} />
+                <YAxis tickMargin={8} />
                 <Tooltip />
                 <Line type="monotone" dataKey="humidity" stroke="#40916c" strokeWidth={2} />
               </LineChart>

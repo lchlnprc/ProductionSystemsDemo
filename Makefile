@@ -32,7 +32,7 @@ socat-stop:
 	fi
 
 run-with-bridge: socat-start
-	@docker compose up -d --build backend postgres
+	@docker compose up -d --build backend postgres frontend python-tester-agent
 	@SERIAL_PORT=socket://host.docker.internal:$(SOCAT_PORT) \
 		API_BASE_URL=http://backend:8080/api \
 		docker compose run --rm -e SERIAL_PORT -e API_BASE_URL python-tester

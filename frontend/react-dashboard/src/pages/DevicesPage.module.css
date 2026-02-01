@@ -77,6 +77,8 @@
   border-radius: 12px;
   font-family: "Courier New", monospace;
   font-size: 12px;
+  max-height: 240px;
+  overflow-y: auto;
 }
 
 .toastHost {

@@ -31,3 +31,7 @@ management:
 logging:
   level:
     root: INFO
+
+live-output:
+  host: ${LIVE_OUTPUT_HOST:host.docker.internal}
+  port: ${LIVE_OUTPUT_PORT:4000}

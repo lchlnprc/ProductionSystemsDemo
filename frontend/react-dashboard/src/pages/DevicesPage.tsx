@@ -18,6 +18,8 @@ export function DevicesPage() {
   const [filter, setFilter] = useState<"all" | "passed" | "failed">("all");
   const [activeExecutionId, setActiveExecutionId] = useState<string | null>(null);
   const [activeDeviceId, setActiveDeviceId] = useState<string | null>(null);
+  const [liveDeviceId, setLiveDeviceId] = useState<string | null>(null);
+  const [liveLines, setLiveLines] = useState<string[]>([]);
   const [toast, setToast] = useState<{ message: string; tone: "success" | "error" | "info" } | null>(null);
   const { data: history } = useGetDeviceTestRunsQuery(selectedId ?? "", {
     skip: !selectedId
@@ -51,29 +53,46 @@ export function DevicesPage() {
     }
   }, [executionQuery.data?.status]);
 
+  useEffect(() => {
+    if (!liveDeviceId) return;
+    setLiveLines([]);
+    const source = new EventSource(`/api/devices/${liveDeviceId}/live-output`);
+    source.addEventListener("log", (event) => {
+      const data = (event as MessageEvent).data as string;
+      setLiveLines((prev) => [...prev.slice(-200), data]);
+    });
+    source.onerror = () => {
+      source.close();
+    };
+    return () => source.close();
+  }, [liveDeviceId]);
+
   const deviceRows = useMemo(() => {
     if (!devices) return [];
     return devices.map((device) => {
       const isActive = device.id === activeDeviceId;
       const status = isActive ? executionStatus : "IDLE";
       return [
-      device.deviceId,
-      new Date(device.registeredAt).toLocaleDateString(),
-      <StatusBadge key={device.id} status={device.health} />,
-      <div className={styles.actionGroup}>
-        <button className={styles.linkButton} onClick={() => setSelectedId(device.id)}>
-          View history
-        </button>
-        <button
-          className={`${styles.runButton} ${styles[status.toLowerCase()] ?? ""}`}
-          onClick={() => handleRunTest(device.deviceId)}
-          disabled={isTriggering && isActive}
-        >
-          {status === "RUNNING" && <span className={styles.spinner} />}
-          {status === "SUCCESS" ? "Success" : status === "FAILED" ? "Failed" : "Run Test"}
-        </button>
-      </div>
-    ];
+        device.deviceId,
+        new Date(device.registeredAt).toLocaleDateString(),
+        <StatusBadge key={device.id} status={device.health} />,
+        <div className={styles.actionGroup}>
+          <button className={styles.linkButton} onClick={() => setSelectedId(device.id)}>
+            View history
+          </button>
+          <button className={styles.linkButton} onClick={() => setLiveDeviceId(device.id)}>
+            View live output
+          </button>
+          <button
+            className={`${styles.runButton} ${styles[status.toLowerCase()] ?? ""}`}
+            onClick={() => handleRunTest(device.deviceId)}
+            disabled={isTriggering && isActive}
+          >
+            {status === "RUNNING" && <span className={styles.spinner} />}
+            {status === "SUCCESS" ? "Success" : status === "FAILED" ? "Failed" : "Run Test"}
+          </button>
+        </div>
+      ];
     });
   }, [devices, activeDeviceId, executionStatus, isTriggering]);
 
@@ -140,6 +159,17 @@ export function DevicesPage() {
               <p>State: {executionStatus}</p>
               {executionQuery.data?.message && <p>Message: {executionQuery.data.message}</p>}
             </div>
+          </div>
+        </Card>
+      )}
+
+      {liveDeviceId && (
+        <Card title="Live device output">
+          <div className={styles.logViewer}>
+            {liveLines.length === 0 && <p>Waiting for logs...</p>}
+            {liveLines.map((line, idx) => (
+              <div key={idx}>{line}</div>
+            ))}
           </div>
         </Card>
       )}
