@@ -2,6 +2,14 @@
 
 This module communicates with the Arduino over serial, runs automated pytest suites, produces structured JSON results, and posts them to the backend API.
 
+## Tests executed
+
+The runner currently includes the following tests:
+
+- **Connectivity** (`test_connectivity`): reads a sample and asserts temperature and humidity are present.
+- **Range validation** (`test_range_validation`): validates temperature and humidity are within configured min/max bounds.
+- **Stability** (`test_stability`): samples multiple readings and verifies standard deviation is within thresholds.
+
 ## Quick start
 
 1. Connect the Arduino and note the serial port.
@@ -44,3 +52,11 @@ Logs are JSON-formatted and written to stdout. Set LOG_LEVEL to control verbosit
 Run the test agent to poll for execution requests:
 
 - `python -m src.cli --poll --device-id DEVICE_001 --api-url http://localhost:8080/api`
+
+## UI-triggered test flow
+
+When an operator clicks **Run Test** in the UI:
+
+1. The frontend posts a **run-test** request to the backend API.
+2. The backend records a pending test execution.
+3. The Python test runner (agent) polls `/api/test-executions/next`, claims the execution, runs the tests automatically, and patches the execution status/results back to the API.

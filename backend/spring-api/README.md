@@ -1,5 +1,7 @@
 # Spring Boot API
 
+Production Systems REST API for devices, test runs, and live execution control.
+
 ## Run locally
 
 - Ensure PostgreSQL is running.
@@ -10,11 +12,31 @@
 - Start:
   - mvn spring-boot:run
 
-## Endpoints
+## Core endpoints
+
+### Devices
 
 - POST /api/devices
+- GET /api/devices
+- GET /api/devices/{id}/test-runs
+- GET /api/devices/{id}/live-output (SSE)
+
+### Test runs
+
 - POST /api/test-runs
 - GET /api/test-runs
+- GET /api/test-runs/{id}
+- GET /api/test-runs/latest
+
+### Test executions (remote trigger)
+
+- POST /api/devices/{deviceId}/run-test
+- GET /api/test-executions/next
+- GET /api/test-executions/{id}
+- PATCH /api/test-executions/{id}
+
+### Metrics
+
 - GET /api/metrics
 
 ## Swagger UI
